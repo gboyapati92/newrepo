@@ -1,0 +1,39 @@
+efx_app_management_ui.dashboard:
+  path: '/user/applications'
+  defaults:
+    _form: '\Drupal\efx_app_management_ui\Form\AppManagementDashboardForm'
+    _title: 'App Dashboard'
+  requirements:
+    user: '\d+'
+    _permission: 'access content'
+    _role: 'authenticated'
+
+efx_app_management_ui.view_clientApp:
+  path: '/user/applications/{clientAppName}'
+  defaults:
+    _controller: '\Drupal\efx_app_management_ui\Controller\AppManagementDashboardUIController::renderClientAppDashboard'
+    _title: 'App Dashboard'
+  requirements:
+    user: '\d+'
+    _permission: 'access content'
+    _role: 'authenticated'
+
+efx_app_management_ui.add_api_product:
+  path: '/user/applications/{clientAppName}/addApiProduct'
+  defaults:
+    _form: '\Drupal\efx_app_management_ui\Form\AddApiProductsForm'
+    _title: 'Add Api Product(s)'
+  requirements:
+    user: '\d+'
+    _permission: 'access content'
+    _role: 'authenticated'
+
+efx_app_management_ui.update_subscription:
+  path: '/user/applications/{clientAppName}/update-subscription'
+  defaults:
+    _form: '\Drupal\efx_app_management_ui\Form\UpdateSubscriptionForm'
+    _title: 'Add Api Product(s)'
+  requirements:
+    user: '\d+'
+    _permission: 'access content'
+    _role: 'authenticated'    

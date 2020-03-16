@@ -1,0 +1,99 @@
+{#
+/**
+ * @file
+ * Theme implementation to display add subscription (individual user-apps).
+ *
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ * - logo: The url of the logo image, as defined in theme settings.
+ * - site_name: The name of the site. This is empty when displaying the site
+ *   name has been disabled in the theme settings.
+ * - site_slogan: The slogan of the site. This is empty when displaying the site
+ *   slogan has been disabled in theme settings.
+ *
+ * Regions:
+ * - page.slideout: Items for the Slideout region.
+ * - page.header_top_highlighted_first: Items for the Header Top Highlighted First region.
+ * - page.header_top_highlighted_second: Items for the Header Top Highlighted Second region.
+ * - page.header_top_first: Items for the Header Top First region.
+ * - page.header_top_second: Items for the Header Top Second region.
+ * - page.header_first: Items for the Header First region.
+ * - page.header: Items for the Header Second region.
+ * - page.header_third: Items for the Header Third region.
+ * - page.banner: Items for the Banner region.
+ * - page.content_top: Items for the Content Top region.
+ * - page.content_top_highlighted: Items for the Content Top Highlighted region.
+ * - page.content: Items for the Content region.
+ * - page.sidebar_first: Items for the First Sidebar region.
+ * - page.sidebar_second: Items for the Second Sidebar region.
+ * - page.content_bottom_first: Items for the Content Bottom First region.
+ * - page.content_bottom_second: Items for the Content Bottom Second region.
+ * - page.featured_top: Items for the Featured Top region.
+ * - page.featured: Items for the Featured region.
+ * - page.featured_bottom: Items for the Featured Bottom region.
+ * - page.sub_featured: Items for the Sub Featured region.
+ * - page.breadcrumb: Items for the Breadcrumb region.
+ * - page.highlighted: Items for the Highlighted region.
+ * - page.footer_top_first: Items for the Footer Top First region.
+ * - page.footer_top_second: Items for the Footer Top Second region.
+ * - page.footer_first: Items for the Footer First region.
+ * - page.footer_second: Items for the Footer Second region.
+ * - page.footer_third: Items for the Footer Third region.
+ * - page.footer_fourth: Items for the Footer Fourth region.
+ * - page.footer_fifth: Items for the Footer Fifth region.
+ * - page.footer_bottom: Items for the Footer Bottom region.
+ * - page.sub_footer_first: Items for the Subfooter First region.
+ * - page.footer: Items for the Subfooter Second region.
+#}
+
+
+
+
+
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}
+<div class="subscription-created">
+<div class="auto-credentials"><h3>Auto-Generated Token</h3>
+<p class="app-dashboard-autocredentials">To test in sandbox, use this static Access Token with each product’s scope.</p>
+{{ form.subscription.access_token }}<i class="fal fa-eye show-credentials"></i><i class="fal fa-copy copy-credentials"><p class="copied-tooltip" style="display:none;">Copied!</p></i><p style="font-size: 12px; font-weight: 400; padding: 0; position: relative; bottom: 38px; float: left;">Expires at: {{ form.subscription.expires_at }}</p></div>
+<div class="manual-credentials">
+<h3>Manually Generated Token</h3>
+<p class="app-dashboard-credentials">If you prefer to manually generate the Access Token, copy and paste the Client ID and Secret.</p>
+<h3 style="position: relative;bottom: 25px; font-size:16px;">Client ID</h3>
+{{ form.subscription.consumerKey }}<i class="fal fa-eye show-credentials" style="bottom: 109px;"></i><i class="fal fa-copy copy-credentials" style="bottom: 109px;"><p class="copied-tooltip" style="display:none;">Copied!</p></i>
+<h3 style="position: relative;bottom: 51px; font-size:16px;">Client Secret</h3>
+{{ form.subscription.consumerSecret }}<i class="fal fa-eye show-credentials" style="bottom: 135px;"></i><i class="fal fa-copy copy-credentials" style="bottom: 135px;"><p class="copied-tooltip" style="display:none;">Copied!</p></i></div>
+</div>
+
+
+
+<div class="client-app-dashboard-apiproducts">
+<p style="position: relative; font: 16px/22px Open Sans; left: 19px; padding-top: 14px; padding-bottom: 28px;">Click on each product to access the OAuth Scope and API Reference.</p>
+<div class="app-dahboard-products-list">
+{% for key in form.subscription.apiProducts %}
+{% if key.apiproduct is defined %}
+<div class="product-title">{{ key.apiproduct|replace({(form.subscription.environment):"", "-":""}) }} <i class="fal fa-chevron-down product-dropdown"></i>
+<div class="product-details" style="display:none;">
+<p class="product-scope">Scope</p><p class="product-scope-value">{{ key.apiProductScope }}</p><i class="fal fa-copy copy-scope"><p class="copiedScope-tooltip" style="display:none;">Copied!</p></i>
+<p class="product-reference">API Reference</p><p class="referece-value">{{ [form.subscription.base_path, key.apiProductReference]|join }}</p></div>
+</div>
+{% endif %}
+{% endfor %}
+</div>
+{{ form.subscription.apiProducts }}
+<div style="display: block;position: relative;padding-bottom: 30px;padding-top: 22px;"><a class="client-app-dashboard-edit-products" style="color:white;" href="/user/applications/{{ form.clientAppId }}/update-subscription">Add API Product</a></div>
+</div>
+

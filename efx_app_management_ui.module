@@ -1,0 +1,22 @@
+<?php
+
+
+function efx_app_management_ui_theme() {
+  return [
+      'dashboard_template' => [
+      'render element' => 'form',
+    ],
+   	'client_app_template' => [
+      'render element' => 'form',
+    ],
+    'add_api_products_template' => [
+      'render element' => 'form',
+    ],
+      'subscription_template' => [
+      'render element' => 'form',
+    ],
+      'update_subscriptions_template' => [
+      'render element' => 'form',
+    ],
+  ];
+}
